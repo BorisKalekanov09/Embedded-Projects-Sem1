@@ -1,4 +1,3 @@
-# Embedded-Projects-Sem1
 # Face Tracking System with Servo (Raspberry Pi + YOLO)
 
 ## 📌 Overview
@@ -40,6 +39,8 @@ The project is built with Python 3. Ensure you have the following installed:
 ### Installation
 ```bash
 pip install opencv-python ultralytics gpiozero lgpio
+
 🚦 LED StatusLEDMeaning🟢 GreenFace detected; Tracking active🟡 YellowFace recently lost; Searching...🔴 RedNo face detected🔄 How It WorksCapture: Grabs a frame from the Pi Camera.Detect: Runs YOLO pose detection to identify facial keypoints.Extract: Pinpoints the $(x, y)$ coordinates of the nose.Smooth: Averages the last few positions to prevent jittery movement.Calculate: Measures the "error" (distance) from the center of the frame.Move: Adjusts the servo angle to bring the nose back to the center.Update: Switches the LED indicators based on detection status.▶️ Run the ProjectTo start the tracking system, execute:Bashpython3 main.py
+
 🛑 Safety[!CAUTION]Power Supply: Use an external power supply for the servo motor. Do not power the servo directly from the Raspberry Pi's 5V pins, as the current spikes can cause the Pi to reboot or damage the GPIO header.
 Would you like me to help you write the **Python code (`main.py`)** to make this s
