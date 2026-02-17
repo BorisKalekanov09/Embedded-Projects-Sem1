@@ -107,6 +107,4 @@ face-tracker/
 
 ---
 
-<p align="center">
-  Built with ❤️ on Raspberry Pi
-</p>
+[Full guide](https://core-electronics.com.au/guides/raspberry-pi/getting-started-with-yolo-pose-estimation-on-the-raspberry-pi/)
