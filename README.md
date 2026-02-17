@@ -1,46 +1,112 @@
-# Face Tracking System with Servo (Raspberry Pi + YOLO)
+# 🎯 Face Tracking System with Servo
 
 ## 📌 Overview
-This project implements a real-time face tracking system using a **Raspberry Pi**, **Pi Camera**, **YOLO pose estimation**, and a **servo motor**.  
 
-The system tracks the user’s face by detecting the nose position and dynamically rotating a servo to keep the face centered in the camera's field of view.
+A real-time face tracking system that uses a **Pi Camera**, **YOLO pose estimation**, and a **servo motor** to keep the user's face centered in frame — automatically.
 
-
+The system detects the nose keypoint, calculates its offset from the frame center, and rotates the servo to correct it. LED indicators provide live visual feedback on tracking status.
 
 ---
 
 ## 📑 Table of Contents
-- [Hardware Used](#-hardware-used)
-- [Software & Libraries](#-software-libraries)
-- [LED Status Indicators](#-led-status)
+
+- [Hardware Used](#%EF%B8%8F-hardware-used)
+- [Software & Libraries](#-software--libraries)
 - [How It Works](#-how-it-works)
-- [Safety Precautions](#-safety)
+- [LED Status Indicators](#-led-status-indicators)
+- [Running the Project](#%EF%B8%8F-running-the-project)
+- [Safety Precautions](#-safety-precautions)
 
 ---
 
 ## ⚙️ Hardware Used
-* **Raspberry Pi** (Model 4 or 5 recommended)
-* **Pi Camera** (Compatible with Picamera2)
-* **Servo Motor** (SG90 or similar)
-* **3 LEDs** (Green, Yellow, Red)
-* **Resistors** (220Ω for LEDs)
-* **External Power Supply** (Recommended for the servo)
+
+| Component | Details |
+|---|---|
+| 🖥️ Raspberry Pi | Model 4 or 5 recommended |
+| 📷 Pi Camera | Compatible with Picamera2 |
+| 🔧 Servo Motor | SG90 or similar |
+| 💡 LEDs | Green, Yellow, Red |
+| ⚡ Resistors | 220Ω for each LED |
+| 🔌 Power Supply | External supply recommended for servo |
 
 ---
 
 ## 🧠 Software & Libraries
-The project is built with Python 3. Ensure you have the following installed:
 
-* `OpenCV`: For image processing.
-* `Picamera2`: For the camera interface.
-* `Ultralytics YOLO`: For high-performance pose detection.
-* `gpiozero` & `lgpio`: For GPIO pin control.
+Built with **Python 3**. Install all dependencies with:
 
-### Installation
 ```bash
 pip install opencv-python ultralytics gpiozero lgpio
+```
 
-##🚦 LED StatusLEDMeaning🟢 GreenFace detected; Tracking active🟡 YellowFace recently lost; Searching...🔴 RedNo face detected🔄 How It WorksCapture: Grabs a frame from the Pi Camera.Detect: Runs YOLO pose detection to identify facial keypoints.Extract: Pinpoints the $(x, y)$ coordinates of the nose.Smooth: Averages the last few positions to prevent jittery movement.Calculate: Measures the "error" (distance) from the center of the frame.Move: Adjusts the servo angle to bring the nose back to the center.Update: Switches the LED indicators based on detection status.▶️ Run the ProjectTo start the tracking system, execute:Bashpython3 main.py
+| Library | Purpose |
+|---|---|
+| `opencv-python` | Image processing & frame capture |
+| `picamera2` | Pi Camera interface |
+| `ultralytics` | YOLO pose estimation |
+| `gpiozero` + `lgpio` | GPIO and servo control |
 
-🛑 Safety[!CAUTION]Power Supply: Use an external power supply for the servo motor. Do not power the servo directly from the Raspberry Pi's 5V pins, as the current spikes can cause the Pi to reboot or damage the GPIO header.
-Would you like me to help you write the **Python code (`main.py`)** to make this s
+---
+
+## 🔄 How It Works
+
+```
+📷 Capture  →  🧠 Detect  →  📍 Extract  →  〰️ Smooth  →  📐 Calculate  →  🔧 Move  →  💡 Update
+```
+
+1. **Capture** — Grabs a live frame from the Pi Camera
+2. **Detect** — Runs YOLO pose estimation to find facial keypoints
+3. **Extract** — Pinpoints the `(x, y)` coordinates of the nose
+4. **Smooth** — Averages recent positions to eliminate jitter
+5. **Calculate** — Measures the error (offset from frame center)
+6. **Move** — Adjusts servo angle to re-center the nose
+7. **Update** — Switches LED indicators based on detection state
+
+---
+
+## 🚦 LED Status Indicators
+
+| LED | Status | Meaning |
+|---|---|---|
+| 🟢 Green | `TRACKING` | Face detected — servo actively following |
+| 🟡 Yellow | `SEARCHING` | Face recently lost — holding last position |
+| 🔴 Red | `IDLE` | No face detected |
+
+---
+
+## ▶️ Running the Project
+
+```bash
+python3 main.py
+```
+
+---
+
+## 🛑 Safety Precautions
+
+> [!CAUTION]
+> **Power Supply Warning:** Always use an **external power supply** for the servo motor.
+>
+> Powering the servo directly from the Raspberry Pi's 5V pins can cause:
+> - Unexpected **reboots** due to current spikes
+> - Permanent **damage to the GPIO header**
+>
+> Use a dedicated 5V supply capable of at least **1A** for the servo.
+
+---
+
+## 📁 Project Structure
+
+```
+face-tracker/
+├── main.py          # Entry point — starts the tracking loop
+├── README.md        # This file
+└── requirements.txt # Python dependencies
+```
+
+---
+
+<p align="center">
+  Built with ❤️ on Raspberry Pi
+</p>
