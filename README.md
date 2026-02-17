@@ -10,12 +10,12 @@ The system detects the nose keypoint, calculates its offset from the frame cente
 
 ## 📑 Table of Contents
 
-- [Hardware Used](#%EF%B8%8F-hardware-used)
-- [Software & Libraries](#-software--libraries)
-- [How It Works](#-how-it-works)
-- [LED Status Indicators](#-led-status-indicators)
-- [Running the Project](#%EF%B8%8F-running-the-project)
-- [Safety Precautions](#-safety-precautions)
+- Hardware Used  
+- Software & Libraries  
+- How It Works  
+- LED Status Indicators  
+- Running the Project  
+- Safety Precautions
 
 ---
 
